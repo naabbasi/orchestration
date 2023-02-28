@@ -1,3 +1,6 @@
+## Useful kubernetes commands
+ - sudo kubectl get pod --all-namespaces
+ - sudo kubectl get svc
 ## Start nginx server in kubernetes
 - sudo kubectl run nginx-http-server --image=nginx --port=80
 - sudo kubectl delete pod/nginx-http-server
