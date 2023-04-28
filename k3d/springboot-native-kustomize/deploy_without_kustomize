@@ -1,0 +1,6 @@
+#!/bin/sh
+
+export BASE=base
+export MICROBOT_HOME=base/microbot
+
+kubectl apply -f $MICROBOT_HOME
