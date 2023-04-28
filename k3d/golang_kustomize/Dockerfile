@@ -11,10 +11,13 @@ ADD . /app
 WORKDIR /app
 
 # Download any required modules
-RUN go mod download
+RUN cd simplehttpserver && go mod download
 
 # Build the program to create an executable binary
-RUN go build -o webserver github.com/src/main.go
+RUN cd simplehttpserver && go build -o webserver github.com/src/main.go
+
+RUN cd simplehttpserver && mv webserver content ../
+RUN ls -ah
 
 # Set the startup command
-CMD ["/app/webserver"]
+CMD ["./webserver"]
