@@ -16,15 +16,22 @@ In order to setup k3d cluster, please follow the following steps:
 2. k3d node edit k3d-control-plane-node-serverlb --port-add 30000-30010:30000-30010
 
 ### Create a registry to deploy the local docker images into the kubernetes
-1. k3d registry create test-app-registry --port 5050
+1. k3d registry create registry.localhost --port 5050 or with registries.yaml
 
-2. k3d cluster create --registry-use k3d-test-app-registry:5050
+2. k3d cluster create dev-cluster-with-registry --registry-use k3d-registry.localhost:5050
 
-###### 2. tag an existing local image to be pushed to the registry
-docker tag nginx:latest k3d-test-app-registry:5050/mynginx:v0.1
+### 2. Build, Tag and Push your own container to the k3d registry
+- docker tag nginx:latest k3d-registry.localhost:5050/mynginx:v0.1
+
+##### Build, Tag and Push your own container
+- docker build -t go-webserver:latest .
+- docker tag go-webserver:latest k3d-registry.localhost:5050/go-webserver:v0.1
 
 ###### 3. push that image to the registry
-docker push k3d-test-app-registry:5050/mynginx:v0.1
+docker push k3d-registry.localhost:5050/go-webserver:v0.1
 
 ###### 4. run a pod that uses this image
-kubectl run mynginx --image k3d-test-app-registry:5050/mynginx:v0.1
+please use deploy_without_kustomize
+
+###### 5. cleanup 
+Please use cleanUp_without_kustomize

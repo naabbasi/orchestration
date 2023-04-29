@@ -1,0 +1,6 @@
+#!/bin/sh
+
+export BASE=base
+export GO_WEBSERVER_HOME=base/go-webserver
+
+kubectl apply -f $GO_WEBSERVER_HOME
